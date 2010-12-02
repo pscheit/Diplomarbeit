@@ -36,18 +36,6 @@ class PScorm_Query extends Object {
     }
     return $ret;
   }
-  /**
-   * Filtert alle Schlüssel aus dem Array die nicht mit $prefix anfangen herraus */
-  public function filterResult(Array $row, $prefix) {
-    $r = array();
-    $index = mb_strlen($prefix);
-    foreach ($row as $key => $value) {
-      if (S::startsWith($key,$prefix)) {
-        $r[mb_substr($key,$index)] = $value;
-      }
-    }
-    return $r;
-  }
 }
 
 
