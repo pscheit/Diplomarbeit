@@ -1,0 +1,51 @@
+\BOOKMARK [-1][]{part.1}{I Die Theorie des Object-relational Impedance Mismatch}{}% 1
+\BOOKMARK [0][]{chapter.1}{1 Einf\374hrung}{part.1}% 2
+\BOOKMARK [1][]{section.1.1}{1.1 Der Aufbau dieser Arbeit}{chapter.1}% 3
+\BOOKMARK [0][]{chapter.2}{2 Die Kernprobleme}{part.1}% 4
+\BOOKMARK [0][]{chapter.3}{3 L\366sungen}{part.1}% 5
+\BOOKMARK [1][]{section.3.1}{3.1 Ersetzen der Datenbank}{chapter.3}% 6
+\BOOKMARK [1][]{section.3.2}{3.2 Object-relational Mapper}{chapter.3}% 7
+\BOOKMARK [0][]{chapter.4}{4 Object-relational Mapping}{part.1}% 8
+\BOOKMARK [1][]{section.4.1}{4.1 Speichern des Zustandes eines Objektes}{chapter.4}% 9
+\BOOKMARK [1][]{section.4.2}{4.2 Speichern von Klassenhierarchien}{chapter.4}% 10
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Horizontales Mapping}{section.4.2}% 11
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Vertikales Mapping}{section.4.2}% 12
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Filter-Mapping}{section.4.2}% 13
+\BOOKMARK [2][]{subsection.4.2.4}{4.2.4 Generelles Mapping}{section.4.2}% 14
+\BOOKMARK [1][]{section.4.3}{4.3 Speichern von Beziehungen zwischen Objekten}{chapter.4}% 15
+\BOOKMARK [1][]{section.4.4}{4.4 Laden und Marshalling von Objekten}{chapter.4}% 16
+\BOOKMARK [1][]{section.4.5}{4.5 Vertiefung: Object Loading}{chapter.4}% 17
+\BOOKMARK [0][]{chapter.5}{5 Frameworks}{part.1}% 18
+\BOOKMARK [1][]{section.5.1}{5.1 \334bersicht}{chapter.5}% 19
+\BOOKMARK [1][]{section.5.2}{5.2 Hibernate und Vererbung}{chapter.5}% 20
+\BOOKMARK [1][]{section.5.3}{5.3 Abfragesprachen}{chapter.5}% 21
+\BOOKMARK [1][]{section.5.4}{5.4 Beziehungen zwischen Objekten}{chapter.5}% 22
+\BOOKMARK [1][]{section.5.5}{5.5 Object Loading}{chapter.5}% 23
+\BOOKMARK [1][]{section.5.6}{5.6 Abbildung von Klassen und Attributen}{chapter.5}% 24
+\BOOKMARK [1][]{section.5.7}{5.7 Zusammenfassung}{chapter.5}% 25
+\BOOKMARK [0][]{chapter.6}{6 Fazit}{part.1}% 26
+\BOOKMARK [1][]{section.6.1}{6.1 Gibt es eine perfekte L\366sung?}{chapter.6}% 27
+\BOOKMARK [-1][]{part.2}{II L\366sungsans\344tze am Beispiel-Framework PSCORM}{}% 28
+\BOOKMARK [0][]{chapter.7}{7 Einf\374hrung}{part.2}% 29
+\BOOKMARK [1][]{section.7.1}{7.1 Aufbau dieses Teils}{chapter.7}% 30
+\BOOKMARK [1][]{section.7.2}{7.2 Besonderheiten von PHP}{chapter.7}% 31
+\BOOKMARK [0][]{chapter.8}{8 Konzepte und Implementierung}{part.2}% 32
+\BOOKMARK [1][]{section.8.1}{8.1 Dynamischer Code}{chapter.8}% 33
+\BOOKMARK [1][]{section.8.2}{8.2 Metainformationen}{chapter.8}% 34
+\BOOKMARK [1][]{section.8.3}{8.3 Cache}{chapter.8}% 35
+\BOOKMARK [1][]{section.8.4}{8.4 Datenbankabstraktion}{chapter.8}% 36
+\BOOKMARK [1][]{section.8.5}{8.5 Abbildung von Klassen und Attributen}{chapter.8}% 37
+\BOOKMARK [1][]{section.8.6}{8.6 Abbildung von Vererbung}{chapter.8}% 38
+\BOOKMARK [1][]{section.8.7}{8.7 Beziehungen zwischen Objekten}{chapter.8}% 39
+\BOOKMARK [1][]{section.8.8}{8.8 Abfragesprache}{chapter.8}% 40
+\BOOKMARK [1][]{section.8.9}{8.9 Object Loading}{chapter.8}% 41
+\BOOKMARK [0][]{chapter.9}{9 Evaluation}{part.2}% 42
+\BOOKMARK [1][]{section.9.1}{9.1 Konfiguration}{chapter.9}% 43
+\BOOKMARK [1][]{section.9.2}{9.2 Test 1}{chapter.9}% 44
+\BOOKMARK [1][]{section.9.3}{9.3 Test 2}{chapter.9}% 45
+\BOOKMARK [1][]{section.9.4}{9.4 Ergebnisse}{chapter.9}% 46
+\BOOKMARK [0][]{chapter.10}{10 Zusammenfassung}{part.2}% 47
+\BOOKMARK [0][]{appendix.A}{A Beispiel Datenbank-Schema}{part.2}% 48
+\BOOKMARK [0][]{appendix.B}{B Quelltext der Evaluation}{part.2}% 49
+\BOOKMARK [0][]{appendix.C}{C Implementierungs\374bersicht PSCORM}{part.2}% 50
+\BOOKMARK [0][]{section*.25}{Literaturverzeichnis}{part.2}% 51

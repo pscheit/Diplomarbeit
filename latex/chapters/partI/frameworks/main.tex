@@ -1,0 +1,236 @@
+\chapter{Frameworks} \label{frameworks}
+
+Im folgenden Kapitel werden nun Frameworks vorgestellt, die den \IMfull lösen. Ich verschaffe zuerst einen kleinen Überblick über die bestehenden Standards und ein paar der bestehenden \ORM-Frameworks und Lösungen. Im zweiten Teil werden manche davon detaillierter untersucht. Die verschiedenen Methoden wie diese Frameworks die Probleme des \IM gelöst haben, liefern einen guten Eindruck über die Komplexität solch einer Implementierung.
+
+\section{Übersicht}
+
+Zur Entwicklung von \ORM-Software wurden viele Spezifikationen entwickelt. Einen Überblick über allein die Java-spezifischen verschafft die folgende Tabelle.\\[2ex]
+\begin{tabularx}{\textwidth}[htbp]{|p{5cm}|X|}
+\hline
+Enterprise JavaBeans 3.0 (EJB) & Spezifikation entwickelt unter dem Java Community Process. Die JavaBeans sind standardisierte Komponenten innerhalb eines Java-EE Servers. Teil von EJB ist die Java Persistence API. \\
+\hline
+Java Persistence API (JPA) & Ist eine Schnittstelle für die objektrelationale Abbildung von POJOs (\term{Plain old Java Object}). Wurde im Rahmen der EJB 3.0 von der Software Expert Group als Teil der JSR 220 entwickelt und herausgegeben. Sie beeinhaltet viele Ideen der APIs von Hibernate, Toplink und JDO. \\
+\hline
+Java Data Objects (JDO) & Offizielle Spezifikation von Sun für ein Framework zur persistenten Speicherung von Java-Objekten. Die JPA wurde maßgeblich von JDO beeinflusst und wird deshalb auch ihr Nachfolger genannt. JDO war ebenfalls eine JSR Spezifikation und wird seit Version 2.0 von der Apache Software Foundation weiterentwickelt.\\
+\hline
+\end{tabularx}\\[2ex]
+Die Masse der \ORM-Tools ist schwer zu erfassen. Für fast jede Programmiersprache und Datenbank wurde mindestens ein kommerzielles Produkt, welches den \IMfull löst, entwickelt. Man findet meistens auch noch eine passende Open-Source Implementierung. Ich versuche hier einen Überblick über die mir am wichtigsten erscheinenden Tools, Frameworks und alternativen Lösungen für den \IM zu geben (Stand: Ende 2010). \\
+\\
+\begin{tabularx}{\textwidth}[htbp]{|p{4cm}|X|}
+\hline
+EclipseLink & EclipseLink implementiert die Java Persistence API (JPA 2.0) und wird deshalb hauptsächlich für Java genutzt. Wird meistens als Datenbank unabhäniger Persistenz-Service genutzt. \\
+\hline
+TopLink & Entwickelt von Oracle war TopLink die Referenzimplementierung der JPA 1.0 und wurde dann durch EclipseLink ersetzt. \\
+\hline
+Hibernate (Nhibernate für .NET) & Open-Source Framework für Java entwickelt von der JBoss Community. Setzt auch die JPA um (Hibernate EntityManager). Hibernate wird von den meisten als \textit{die} Referenz für die Lösung des \IM im Open-Source-Bereich für Java gesehen.\\
+\hline
+DataObjects.NET & DataObjects.NET ist ein \ORM-Framework für das .NET Framework. DataObjects.NET wird unter der GPL Lizenz veröffentlicht. Es unterstützt LINQ und kann auch ohne Datenbank benutzt werden. Die Internationalisierung von Objekten ist möglich und vieles mehr.\\
+\hline
+Cayenne & Entwickelt von der Apache Software Foundation, ist Cayenne ist Open Source \ORM-Framework unter der Apache Lizenz. Außer dem Verbinden von Datenbankschemata mit Java Objekten unterstützt es auch Transaktionen, SQL Generierung und \term{remoting Services}, ein Webservice basierte Technologie für den Ersatz einer lokalen Datenbank. \\
+\hline
+Caché & Caché wird von InterSystems entwickelt und geht einen etwas anderen Weg als Objektdatenbanken und \ORM-Frameworks: Es bezeichnet sich als postrelationale Datenbank. Caché ermöglicht verschiedene Sichten auf die Objekte in der Datenbank: per SQL (z.~B. über ODBC/JDBC) oder aber auch durch eine objektorientierte API. Es werden jeweils nur die Schnittstellen angesprochen und dieselben internen Datenbankbefehle genutzt. Mit der Jalapeño-Technologie\footnote{\textbf{JA}va \textbf{LA}nguage \textbf{PE}rsistence with \textbf{NO} mapping} ist es möglich \term{POJOs} mit einem \term{Object-Manager} persistent zu machen \cite{cache-jalapeno}. Mit dieser Technologie entfällt das Mapping von Klassen und die Objekte werden durch automatische generierte Methoden, die unabhängig von der Javaklasse sind, in der Caché Datenbank (oder sogar in einer relationalen Datenbank) gespeichert. \\
+\hline
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}[htbp]{|p{5cm}|X|}
+\hline
+Language Integrated Query (LINQ) to SQL & LINQ ist ursprünglich eine Komponente des .NET Frameworks zur Abfrage von Datenquellen (XML, Datenbanken). Es ist eine Spracherweiterung und ermöglicht Abfragen in einer SQL-Select ähnlichen Struktur an Datenstrukturen innerhalb des Programmes. Die Spracherweiterung kann so von Herstellern erweitert werden, dass die Transformierung in andere Anfragesprachen möglich ist. Deshalb löst \term{LINQ to SQL} den \IM \cite{meijer-linq-visual-basic}.\\
+\hline
+LinqConnect & LinqConnect ist eine Implementierung die nah an \term{LINQ to SQL} von Microsoft angelehnt ist. Es ist eine einfach zu benutzende \ORM-Lösung, die als Server Oracle, SQL Server, MySQL, PostgreSQL und SQLLite unterstützt. Zusätzlich wird ein Modell-Designertool für Visual Studio mitgeliefert.\\
+\hline
+OpenJPA & OpenJPA ist eine Open-Source (Apache Lizenz) Implementierung der Java Persistence API (2.0). OpenJPA wird von der Apache Software Foundation entwickelt.\\
+\hline
+JPOX & In der Version 1.2 implementiert JPOX die JPA 2.0 und die JDO 2.0 Spezifikation. Es ist also ein weiteres Persistenz-Framework für Java.\\
+\hline
+Kohana & Kohana bezeichnet sich selbst als lightweight PHP Framework. Ein Modul dieses Frameworks überbrückt den \IM. \\
+\hline
+Doctrine & Doctrine ist ein weiteres PHP Framework. Es benutzt ähnliche Konzepte wie Hibernate und hat somit auch eine eigene Query Language (DQL).\\
+\hline
+Propel & Als Teil vom Symphonie Framework für PHP5, ist Propel für den \ORM-Bereich zuständig. Propel generiert automatisch PHP Code, der die Klassen des objektorientierten Models persistent machen kann. Dabei werden auch einzelne Queries pro Klasse definiert. Durch dieses Kompilieren spart Propel zur Laufzeit jede Menge Resourcen. Zusätzlich werden Prepared Statements, Transaktionen und Validatoren sowie ein \objectcache unterstützt.\\
+\hline
+ActiveRecord & ActiveRecord ist eine Lösung für Ruby on Rails (ein Ruby Framework), die das ActiveRecord Pattern implementiert.\\
+\hline
+GORM & GORM ist die \ORM-Lösung für Grails. Grails ist ein Framework basierend auf Groovy, welches an Ruby on Rails angelehnt ist. Groovy ist eine dynamische Open-Source Programmiersprache für die Java Virtual Machine. Sie ermöglicht durch ihre dynamischen Features interessante und neue Methoden alte Probleme zu lösen. GORM gilt deshalb als innovative Lösung für den \IM \cite{orm-dynamic-languages}.\\
+\hline
+\end{tabularx}\\[2ex]
+Einen Eindruck von den Performanzleistungen einiger dieser Frameworks, die für .NET entwickelt wurden, bietet \cite{ormeter.net}. Dort wird auch beleuchtet inwiefern diese Frameworks die Features von LINQ implementieren.\\
+Eine Betrachtung aller Details für jedes Framework würde den Rahmen dieser Arbeit sprengen, deshalb wird das Augenmerk auf Besonderheiten von einigen, für diese Arbeit relevanten, Implementierungen gerichtet. Dies bedeutet natürlich nicht, dass nicht genannte irrelevant in den anderen Bereichen sind. Ich lege meinen Schwerpunkt auf die Frameworks, in die ich den meisten Einblick\footnote{unter anderem auch durch praktische Anwendung} erhalten kontte:\\
+\begin{itemize}
+\item Oracle TopLink 11.g (11.1.1) für Java \cite{toplink-documentation}
+\item Hibernate 3.6.0.CR2 für Java \cite{hibernate-documentation}
+\item Kohana 2.4.0 RC2 für PHP \cite{kohana-documentation}
+\item Doctrine 2.0.0BETA4 für PHP \cite{doctrine-documentation}
+\end{itemize}
+
+\section{Hibernate und Vererbung}
+
+Hibernate (\cite{Hibernate}) ist ein \term{ORM-Tool} für Java und .NET (dort heißt es NHibernate). Es ist eine Open-Source Software und hat sich als \textit{die} Alternative für kommerzielle Produkte durchgesetzt.\\
+Die Konfiguration eines Mappings wird in Hibernate durch den Entwickler eingestellt. Zu jeder Klasse, die persistent werden soll, wird eine XML-Steuerungsdatei angelegt, die das Mapping spezifiziert. Die XML-Dateien können auch automatisch durch Tools erzeugt werden, indem \term{XDoclet-Tags} aus dem Java-Quellcode ausgelesen werden. In JDK 5.0 kann dies mit \term{Annotations} erreicht werden.\\
+Der Großteil der Frameworks konzentriert sich auf eine ausgewählte Möglichkeit ein \term{Mapping} von der Domain des Objekt-Models zum relationalen Schema zu realisieren. Dabei wird oft vernachlässigt, dass ein \term{Mapping} in einem Kontext besonders effektiv und performant sein kann, aber für einen anderen Kontext fast unbrauchbar ist. Am besten wird dies am Beispiel des \term{Mappings} für Vererbung deutlich. In einer sehr tiefen Klassenstruktur, benötigt man bei der Verwendung von horizontalem Mapping zu viele Joins, um ein Objekt laden zu können. Filter-Mapping kann besonders effektiv sein, wenn die Basisklasse sehr groß ist und die Kindklassen nur wenige Attribute haben. Die schlechteste Lösung wäre in diesem Fall ein vertikales Mapping zu benutzen, weil es viele, sehr kleine Tabellen erzeugen würde.\\
+Anders als andere Frameworks entscheidet sich Hibernate nicht für nur für ein Mapping, sondern lässt dem Benutzer die Wahl zwischen allen drei Möglichkeiten:
+\begin{itemize}
+\item \term{Table per class hierarchy} (Filter-Mapping)
+\item \term{Table per subclass} (vertikales Mapping)
+\item \term{Table per concrete class} (horizontales Mapping)
+\end{itemize}
+\cite[Kapitel: Inheritance]{hibernate-documentation}\\
+Der Entwickler muss sich nicht unbedingt für eine der verschiedenen Strategien entscheiden, sondern kann sogar mehrere miteinander kombinieren. Somit ist es z.~B. möglich einen Teil der Hierarchie als \term{Filter Mapping} und den anderen Teil als \term{vertikales Mapping} abzubilden. Dies bietet höchste Flexibilität und lässt die Benutzung der performantesten Strategie zu.\\
+
+\section{Abfragesprachen}
+
+Kohana \cite{kohana} und Doctrine \cite{doctrine} sind beides PHP Frameworks. Beide haben sich gegen die wirklich großen PHP-Frameworks wie z.~B. Zend noch nicht durchgesetzt, dennoch werden beide in vielen Projekten benutzt. Kohana überzeugt durch einen geringen und übersichtlichen Code, während Doctrine eine konsequente objektorientierte Umsetzung und viele Konzepte von Hibernate besitzt. \\
+Wie in den Kapiteln zuvor betont, ist das Design der \term{Query-Language}, mit der Objekte aus der Datenbank geladen werden können, eines der anspruchsvollsten Aufgaben des \ORM. Hibernate bietet eine eigene Implemetierung einer Abfragesprache, genannt HQL (\term{Hibernate Query Language}), ermöglicht aber auch die Verwendung von purem SQL oder einer objektorientierten API. Kohana bietet nur diese API an (Beispiel \ref{kohana-sql-api}). \\
+\newfloat{fexample}{htbp}{lop}
+\floatname{fexample}{Beispiel}
+\begin{fexample} 
+\lstset{style=SQL}
+\begin{lstlisting}
+SELECT `timeslice`.`id` AS `timeslice:id`,
+       `timeslice`.`user_id` AS `timeslice:user_id`,
+       `timeslice`.`aggregation_id` AS `timeslice:aggregation_id`,
+       `timeslice`.`start` AS `timeslice:start`,
+       `timeslice`.`end` AS `timeslice:end`,
+       `aggregations`.*,
+       `users`.*,
+FROM `aggregations`
+LEFT JOIN `timeslices` AS `timeslice` ON (`timeslice`.`aggregation_id` = `aggregations`.`id`)
+LEFT JOIN `users` AS `user` ON (`timeslice`.`user_id` = `users`.`id`)
+WHERE `aggregations`.`closed` = '1'
+AND `timeslice`.`user_id` = 10
+ORDER BY `timeslice:start` DESC
+\end{lstlisting}
+\caption{Abfrage auf der Beispiel-Datenbank in reinem SQL}
+\end{fexample}
+\begin{fexample} 
+\lstset{style=php}
+\begin{lstlisting}
+$res = ORM::factory('aggregation')
+         ->with('timeslice')
+         ->with('timeslice:user')
+         ->with('aggregations_project')
+         ->with('aggregations_project:project')
+         ->where(Array(
+            'aggregations.closed'=>'1',
+            'timeslice.user_id'=>10,
+          ))
+        ->orderby(array('timeslice:start'=>'DESC'))
+        ->find_all();
+\end{lstlisting}
+\caption{Abfrage auf der Beispiel-Datenbank in Kohana (objektorientierte SQL API)}
+\label{kohana-sql-api}
+\end{fexample}
+%$
+\noindent Doctrine nennt seine Abfragesprache -- analog zu Hibernate -- DQL (\term{Doctrine Query Language}). Die DQL ähnelt SQL, allerdings wird diese Sprache erweitert, so dass es möglich ist z.~B. Klassennamen als Tabellen und \term{JOINs} ohne \term{ON}-Bedingung zu benutzen. Da Doctrine einen eigenen Parser benutzt, um die DQL zu bearbeiten, sind auch eigene Erweiterungen dieser Sprache möglich und die Kapselung der unterliegenen Datenbank bleibt erhalten. Die DQL-Abfrage wird in objektorientierte Strukturen umgewandelt und dann an den \term{Database Abstraction Layer} (\term{DBAL}) weitergegeben. Ein \term{DBAL} erlaubt dann ohne den Code der Applikation zu ändern, das Datenbanksystem zu wechseln. \\
+Es ist aber nicht nur möglich in DQL Abfragen zu schreiben. Doctrine stellt einen \term{QueryBuilder} zur Verfügung, der ähnlich wie in Kohana, eine objektorientierte SQL API zur Verfügung stellt.\\
+Die HQL von Hibernate ermöglicht ebenfalls eine einfache Schreibweise für die Abfrage von Objekten: Im FROM-Teil von Abfragen können Objektnamen genutzt werden, \term{JOINs} können ohne \term{ON}-Bedingung benutzt werden und die erweiterte Punkt-Notation wie z.~B. \code{aggregation.timeslice.start} erlaubt implizit auf Unterobjekte des Objektes zuzugreifen \footnote{in dem Falle hier ist \term{timeslice} ein Unterobjekt von \object{aggregation} und hat ein Attribut \term{start}}. \\
+\begin{fexample}
+\lstset{style=SQL}
+\begin{lstlisting}
+select Timeslice,
+       Aggregation,
+       User
+from Aggregation agg
+  left join fetch agg.timeslices as timeslices
+  left join fetch timeslices.user as user
+where agg.closed = 1
+    and user.id = 10   # dasselbe wie agg.timeslices.user.id
+\end{lstlisting}
+\caption{Abfrage auf der Beispiel-Datenbank in Hibernate (HQL)}
+\end{fexample}
+\noindent Es können -- von der unterliegenden Datenbank unterstützte -- skalare Funktionen und Join-Typen benutzt werden. Damit werden nahezu alle Features von SQL durch HQL abgebildet. Eine eigene Abfragesprache zu entwickeln ist durchaus sinnvoll. Dadurch, dass das Selektieren von einzelnen Attributen eines Objektes, das Erstellen von Bedingungen für \term{JOINs} und das Erstellen von eigenen Traversierungen der Beziehungen wegfällt, wirkt eine geschriebene HQL Anfrage übersichtlicher und ist kürzer als eine herkömmliche SQL Abfrage [Beispiel \ref{sql-hql}].
+\begin{fexample} 
+\lstset{style=sql}
+\begin{lstlisting}
+SELECT cust.name, cust.address, cust.phone, cust.id, cust.current_order
+FROM customers cust,
+    stores store,
+    locations loc,
+    store_customers sc,
+    product prod
+WHERE prod.name = 'widget'
+    AND store.loc_id = loc.id
+    AND loc.name IN ( 'Melbourne', 'Sydney' )
+    AND sc.store_id = store.id
+    AND sc.cust_id = cust.id
+    AND prod.id = ALL(
+        SELECT item.prod_id
+        FROM line_items item, orders o
+        WHERE item.order_id = o.id
+            AND cust.current_order = o.id
+    )
+\end{lstlisting}
+\lstset{style=sql}
+\begin{lstlisting}
+
+
+select cust
+from Product prod,
+    Store store
+    inner join store.customers cust
+where prod.name = 'widget'
+    and store.location.name in ( 'Melbourne', 'Sydney' )
+    and prod = all elements(cust.currentOrder.lineItems)
+\end{lstlisting}
+\caption{Die gleiche Abfrage in SQL (oben) und HQL (unten)}
+\label{sql-hql}
+\end{fexample}
+Die Vorteile sind also ersichtlich: Es ist einfacher große und komplexe Anfragen in einem ähnlichen Stil wie einem bereits bekannten Standard zu schreiben, als eine neue, objekt\-orientierte SQL API zu lernen, die möglicherweise nicht vollständig alle Konstrukte von SQL übernommen hat\footnote{Das ist leider bei Kohana der Fall}. Trotzdem wird mit den \term{HQL}-Abfragen die Applikation nicht an das Schema der relationalen Datenbank gekoppelt, da die Anfrage zuerst geparst und an die Datenbankverwaltung weitergegeben wird, die dann den Befehl in SQL transformiert. Die Performanz, eine solchen Abfrage zuerst auf Textbasis zu analysieren, wieder in SQL zu transformieren und anschließend auszuführen, ist kritisch zu überprüfen\footnote{Dieses Problem lässt sich mit Caches für PHP relativ gut umgehen}. Dennoch scheint hier das Entwickeln einer eigenen Abfragesprache den Aufwand wert zu sein.\\
+
+\section{Beziehungen zwischen Objekten}
+
+Bevor ich beschreiben werde, wie Oracle Toplink \cite{toplink-documentation} Beziehungen (\term{Mappings}) zwischen Klassen realisiert, möchte ich die grundlegende Struktur einer ORM Lösung, die mit TopLink arbeitet, vorstellen.
+TopLink unterstützt generell drei verschiedene Arten von \ORM-Konfigurationen, die sich durch die Datenquellen unterscheiden: 
+\begin{itemize}
+\item XML
+\item \term{EIS}-Datenquellen über einen \term{JCA} Adapter
+\item relationale Datenbanken
+\end{itemize}
+Ich konzentriere mich hier nur auf die Konfiguration mit relationalen Datenbanken.\\
+In den sogenannten relationalen Projekten kann jede Datenbank genutzt werden, die über \term{JDBC} erreichbar ist. Die Konfiguration eines Projektes erfolgt über \term{Descriptors}. Ein \term{(relational) Descriptor} beeinhaltet eine Menge von Mappings und Einstellungen, die dafür benötigt werden, eine übliche Java-Klasse persistent zu machen. \term{Descriptors} sind hierarchisch, werden bei der Kompilierung in XML umgewandelt und können durch Java selbst, das Tool „TopLink Workbench“ oder durch den „Oracle JDeveloper Editor“ erstellt werden. TopLink Workbench ermöglicht das Zusammenstellen der \term{Descriptors} und \term{Mappings} durch Klicks und Bearbeiten von Eigenschaften, ohne dass XML- oder Javacode geschrieben werden muss. Ob der Workbench, der JDeveloper Editor oder Java selbst gewählt wird, ist irrelevant, da alle Methoden die XML Files, die zur Laufzeit von TopLink gelesen werden, erzeugen. Deshalb werde ich das Vorgehen, verschiedene Mappings zu konfigurieren nur erklären und nicht für eine bestimmte Methode explizit ausformulieren. \\
+\\
+TopLink unterscheidet generell bidirektionale und unidirektionale Beziehungen. Bei bidirektionalen Beziehungen, die während der Laufzeit geändert werden, muss die Referenz der jeweils andere Seite auch modifiziert werden, wenn dieses Objekt bereits im Speicher vorhanden ist. In TopLink ist es möglich dies entweder automatisch erledigen zu lassen, oder die bidirektionale Beziehung selbst (in den Settern und Gettern der Klassen) zu verwalten. Es wird jedoch davor gewarnt automatisches Verwalten zu aktivieren, wenn ein Objekt der Beziehung in einem anderen Kontext verwendet werden kann, wo es diese Beziehung nicht besitzt.\\
+Das Vorgehen für ein bidirektionales Mapping für die Tabellen \tabelle{timeslices} und \tabelle{users} im Beispiel-Datenbankschema (Anhang \ref{beispiel-datenbankschema}) wäre in diesem Fall: \\
+\begin{enumerate}
+\item Es müssen \term{Descriptors} für \tabelle{timeslices} und für \tabelle{users} erstellt werden. Die passenden Java-Klassen heißen \term{Timeslice} und \term{User}.
+\item Es wird für beide \term{Descriptors} ein neues, relationales \term{OneToMany - Mapping} erstellt.
+\item In dem Mapping in \term{Timeslice} wird der \term{Referencediscriptor} auf \term{User} gesetzt
+\item In dem Mapping in \term{User} wird der \term{Referencediscriptor} auf \term{Timeslice} gesetzt
+\item Im Mapping von \term{Timeslice} wird die Spalte \term{user\_id} als \term{ForeignKeyFieldName} definiert.
+\item Im Mapping von \term{User} wird die Spalte \term{id} als \term{TargetForeignKeyFieldName} definiert.
+\end{enumerate}
+Dieses Vorgehen ist besonders flexibel, da man entscheiden kann, ob das Mapping auf der einen Seite ebenfalls gesetzt werden soll. Es würde auch funktionieren, wenn man nur in \term{Timeslice} das \term{OneToMany - Mapping} setzt und in \term{User} nicht. Allerdings könnte man dann in \term{User} auf keine Collection von \term{Timeslices} zugreifen, sondern nur für jeden \term{Timeslice} auf den passenden \term{User}. Der Entwickler kann somit selbst bestimmen, welche Navigationspfade er in seiner Applikation zwischen Objekten anlegen will und welche nicht.\\
+\\
+Hibernate benutzt eine ähnliche Methode, allerdings werden Annotations oder XML Files als Konfigurationsmöglichkeiten genutzt. Auch hier können bidirektionale Beziehungen oder unidirektionale Beziehungen gepflegt werden. Zusätzlich lassen sich für jede Beziehung noch weitere Optionen einstellen: Z. B. ob die \term{OneToMany}-""Be\-zieh\-ung mit einer Relation im relationalen Schema abgebildet werden soll. Das bedeutet, dass nicht eine Relation einen Fremdschlüssel für die andere beeinhaltet, sondern beide Fremdschlüssel in dieser Zwischtentabelle existieren, so wie es bei einer \term{ManyToMany}-Beziehung wäre\footnote{Dies ist das Prinzip der Zwischentabelle wie im Kapitel \ref{orm-beziehungen} erklärt}. Es ist möglich eigene Join-Bedingungen zu formulieren, doppelte Fremdschlüssel (Schlüssel auf beiden Seiten der Beziehung) zu definieren und die Art der Verknüpfung genauer zu spezifizieren. Letzteres meint, das Hibernate angewiesen werden kann, Objekt B zu löschen wenn Objekt A gelöscht wird und mit B in einer Beziehung mit der Option \term{Cascade: delete} steht. Analog gibt es Optionen für das kaskadierte Update. Das \term{Lazy Loading} kann hier ebenso eingestellt werden. Jedes Objekt kann so sehr genau für seinen Lebenszyklus in der objektorientierten Applikation konfiguriert werden. Der Entwickler muss nicht mehr darauf achten, dass Objekte in einem Kompositionsmuster als unreferenzierte Objekttupel in der Datenbank bleiben. \\
+Auch das Collection-Handling von Hibernate ist mit größerem Umfang an Funktionalität ausgestattet. So ist es zum Beispiel bei einer sortierten Collection möglich, den Sortierschlüssel in der Zwischentabelle zu definieren, oder ein eigenes Kriterium zur Sortierung anzugeben, welches dann im Abfrage-SQL benutzt wird. Auch in Collections ist kaskadiertes Löschen möglich. \\
+
+\section{Object Loading}
+
+Das klassische \term{Lazy Loading} ist in Toplink elegant gelöst. Es gibt drei verschiedene Möglichkeiten \term{Lazy Loading (Indirection)} zu erreichen. Die erste ist an der Stelle des Attributes im Objekt A, welches auf ein anderes Objekt B verweisen soll einen \term{value holder} einzufügen, statt das Objekt direkt zu laden. Ein \term{value holder} ist eine Instanz einer Klasse die das Interface \term{ValueHolderInterface} implementiert. Greift nun der Getter von Objekt A auf das Attribut zu, in dem der \term{value holder} liegt, wird dieser mit dem konkreten Objekt ergänzt. Bei einer weiteren Anfrage des Getters, wird dann einfach der gespeicherte Wert innerhalb des \term{value holder} zurückgegeben. \\
+Die zweite Methode ist einen \term{Proxy} zu benutzen, der zunächst das gewünschte Objekt simuliert, indem es ein Interface dieses Objektes implementiert. Das bedeutet, dass jedes Objekt der Applikation, welches als \term{Indirection Proxy} genutzt werden soll ein Interface für die eigenen Methoden benutzen muss, man aber den Vorteil hat, dass keine spezielle Klasse von TopLink (wie in der ersten Methode) verwendet werden muss.\\
+Die dritte Möglichkeit ist ausschließlich für Collections (Hashtable, List, Map, Vector, etc) geeignet und nennt sich \term{transparent container indirection}. Wird ein Mapping als \term{transparent container indirection} auf der Many-Seite einer Beziehung konfiguriert, benutzt TopLink eine konkrete Klasse aus dem \term{indirection} Package, welches das gewünschte Interface der Collection implementiert (Hashtable, List, Map, etc). Die Objekte auf die dann in der Applikation zugegriffen wird, werden dynamisch nachgeladen. \\
+Das bietet dem Entwickler eine hohe Flexibilität für das \term{Lazy Loading}. Er kann nun selbst entscheiden, welche Objekte der Applikation von Anfang an komplett erstellt werden und welche durch weitere Abfragen aus der Datenbank geladen werden. Da der \term{ORM} nicht selbst entscheidet, welche Objekte er \term{lazy loaded}, ermöglicht dies die beste Performanz zu erreichen. \\
+\\
+In Doctrine ist \term{Lazy Loading} das Standardverhalten, d.~h. jedes Unterobjekt eines Objektgraphen wird mit \term{Lazy Loading} geladen. Doctrine benutzt dafür Proxys, die sich wie die Originalobjekte verhalten, aber automatisch Abfragen an die Datenbank schicken, wenn auf ihre noch nicht geladenen Attribute zugegriffen wird. Wenn man also nicht alle Objekte in Doctrine laden will, muss man mit der DQL eine größere Abfrage formulieren und sicherstellen, dass alle Objekte die man in diesem Teil der Applikation benötigt auch hydriert werden. Als Default werden alle Objekte aus dem Cache geladen, wenn sie schon einmal geladen wurden. Dieses Verhalten kann mit \term{Query-Hints} überschrieben oder modifiziert werden.\\
+\\
+In Kohana sind in der Standardeinstellung alle Unterobjekte nicht geladen. Erst wenn man auf ein Attribut zugreift, wird dieses mit einem weiteren Query an die Datenbank geladen. Die Verwaltung dieser Logik passiert durch eine PHP-Magic Funktion\footnote{Funktion die jedes mal von PHP aufgerufen wird, wenn ein nicht gesetztes Attribut angesprochen wird}. Wenn man nicht alle Objekte des Graphen mit \term{Lazy Loading} laden will, muss man wie bei Doctrine ein größeres Query erstellen. Im \term{Query-Builder}\footnote{objektorientierte SQL API} kann man die gewünschten Unterobjekte mit einer Funktion \term{with()}hinzufügen. Kohana muss dazu alle Assoziationen zwischen diesen Objekten bereits kennen. Man ist als Entwickler selbst dafür verantwortlich, dass das Laden von mehreren Unterobjekten funktioniert, denn die Applikation gibt im Normalfall keinen Fehler aus und alle Objekte werden mit \term{Lazy Loading} geladen. Wird die Abfrage sehr groß, leidet auch die Performanz. Der Grund ist, dass an jede Initialisierungsfunktion der Unterobjekte die gesamte Zeile der Abfrage (die natürlich sehr breit ist) weitergegeben wird. Außerdem wird die Performanz durch Magic-Methoden in PHP enorm verringert. \\
+
+\section{Abbildung von Klassen und Attributen}
+
+Hibernate und TopLink benutzen beide ein eigenes System um jegliche Form von Mappings für Attribute zu ermöglichen. Ein Attributmapping ist eine Regel, die den Wert aus der objektorierten Applikation eines Objektattributs in das relationale Schema überträgt. Dabei gibt es in beiden Lösungen eine fast unbegrenzte Anzahl von Möglichkeiten diese Regeln umzusetzen:
+\begin{itemize}
+\item Mit \term{Transformation Mappings} können Datentypen der Applikation (z.~B. Java.util.date) in Datentypen des relationalen Schemas (z.~B. DATE und TIME) umgewandelt werden.
+\item Mit read und write Expressions (Hibernate), \term{Attribute Transformers} (TopLink) oder \term{Custom Mapping Types} (Doctrine) kann jede beliebige Funktion für die Transformierung von Attributen benutzt werden.
+\item Es gibt vorgefertigte Attributmappings, die Objekte in BLOBs oder Strings einer Tabelle serialisieren.
+\item Es gibt Attributmappings auf objektrelationale Datentypen (TopLink).
+\item Es existieren XML-Type Mappings, mit denen ganze Objekte oder kombinierte Attribute als XML serialisiert werden können (Hibernate, Toplink).
+\item Es können eigene Interfaces implementiert werden, die die Werte transformieren (Toplink, Doctrine, Hibernate).
+\end{itemize}
+In Kohana ist es nicht möglich Attributmappings selbst zu schreiben. Nur elementare Datentypen werden durch fixe, durch Kohana definierte Mappings übertragen. Möchte man z.~B. einen \term{Unixtimestamp} nicht als \term{INT}-Datentyp in der Datenbank speichern, ist dies nicht möglich. Die Transformationen müssen in den Gettern und Settern des persistenten Objektes geschrieben werden, so dass bei jedem Zugriff die Transformation erneut ausgeführt werden muss.\\
+Doctrine ermöglicht ebenso wie TopLink das Definieren von eigenen Mappings. Es ist sogar möglich einen eigenen Metadatentreiber zu schreiben, der dann die Metadaten aus irgendeiner Datenquelle lesen kann (es ist z.~B. XML / YAML möglich). Als einfache Mappings sind Transformationen von elementaren Datentypen aus PHP in elementare Datentypen aus dem relationalen Schema möglich. Diese Mappings können jedoch durch eigene Klassen modifziert werden - ebenso wie bei TopLink und Hibernate. Es müssen jediglich die Funktionen des Interfaces\footnote{convertToPHPValue() und convertToDatabaseValue()} implementiert werden).
+
+\section{Zusammenfassung}
+
+Generell gibt es in Hibernate die meisten Konfigurationsmöglichkeiten. Während eine komplexe Konfiguration meistens bedeutet, dass die Benutzung der Software komplizierter wird, ist dies in Hibernate nicht der Fall. Die XML-Konfigurationsdateien und die Annotations bleiben größtenteils übersichtlich und wirken auf mich intuitiv. Werden Konfigurationsoptionen weggelassen, benutzt Hibernate immer einen Standard, der schon genau der Wert wäre, denn man eingestellt hätte. Somit sind z.~B. Fremdschlüssel immer als Tabellenname\_id gekennzeichnet. In den meisten Fällen lassen sich sogar diese globalen Standards einstellen.\\
+TopLink konzentriert sich hingegen auf das eigene Workbench Tool, welches er\-mög\-licht alle Optionen der Mappings und Relationen per Klick in einer GUI einzustellen. Zwar ist dies in der praktischen Anwendung sehr komfortabel, aber wenn man weitere Optionen benötigt, die noch nicht in der GUI vorhanden sind, muss man auf das Schreiben von Java Code zurückfallen. Zusätzlich sind in der Dokumentation mehr Beispiele mit Screenshots für das Workbench Tool als für Java Code zu finden, so dass es schwieriger ist Spezialfälle umzusetzen. Insgesamt sind die Optionen auch nicht so detailliert wie bei Hibernate. Das liegt aber unter Umständen auch daran, dass man in Java jede Klasse, die ein bestimmtes TopLink-Interface implementiert als Ersatz für die TopLink Klassen mit wenigen Optionen benutzen kann. Man kann also die Mappings durch eigenen Java Code anpassen und ist somit ebenfalls flexibel, auch wenn man die API besser kennen muss.\\
+Vergleicht man die ORM Lösung von Kohana mit der Vielfalt von Optionen von Hibernate und TopLink ist klar, warum Kohana sich nur als kleines Framework bezeichnet. Zwar lässt auch Doctrine viele Features aus, die bei Hibernate und TopLink stark ausgereift scheinen, es hat diese aber dennoch in der Roadmap stehen\footnote{Man muss auch beachten, dass es sich noch um eine Betaversion handelt}. Vermutlich liegt es aber auch daran, dass Java eine weitaus mächtigere Sprache als die einfache Skriptsprache PHP ist und es somit für Hersteller generell mehr Potential auszuschöpfen gibt.\\
+Durch die Annotations und Prinzipien mit den verschiedenen Problemen umzugehen, könnte man Doctrine als PHP-Äquivalent für Hibernate bezeichnen. Obwohl ich Doctrine noch nie in einer realen Applikation testen konnte, wirken die Konzepte sehr vielversprechend. Auch eine konsequente objektorierte Programmierung, die nicht immer in PHP Applikationen gegeben ist, überzeugt. Überall dort wo Optionen fehlen könnten, ist es möglich die Applikation durch Implementierung von Interfaces zu erweitern. \\

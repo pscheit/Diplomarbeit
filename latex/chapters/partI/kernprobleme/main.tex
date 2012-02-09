@@ -1,0 +1,31 @@
+\chapter{Die Kernprobleme}
+
+Es stellt sich zuerst die Frage, welche konkreten Probleme zur Überbrückung des \term{Impedance Mismatches} gelöst werden müssen. Um den Zustand der Objekte und das Modell der objektorientierten Applikation abdeckend in der Datenbank persistent speichern zu können, müssen zumindest folgende Teilprobleme behandelt werden:
+\paragraph{Speichern der Struktur einer Klasse}
+Ein Objekt im objektorientierten Model besitzt eine Klasse. Die Klasse definiert die Methoden und Eigenschaften des Objektes und kann sich in einer Klassenhierarchie befinden. Im relationalen Schema sind Klassen nicht enthalten und können deshalb nicht natürlich abgebildet werden.
+
+\paragraph{Speichern des Zustandes eines Objektes}
+Eine Objektinstanz kann in der Applikation mehrere Zustände annehmen und wird von Methoden von einem in den nächsten überführt. Der Zustand des Objektes muss im relationalen Schema dargestellt werden. Wie kann dieser identifizierbar sein und wieviel muss man von der Objektinstanz in der Datenbank pflegen, um dies zu erreichen?
+
+\paragraph{Speichern von Beziehungen zwischen Objekten}
+Im objektorientierten Model haben Objektinstanzen die Möglichkeiten untereinander Daten auszutauschen. Objekte bestehen nicht nur allein sondern sind mit anderen Objekten gekoppelt (Assoziation), aus weiteren Objekten zusammengesetzt (Komposition) oder beeinhalten Objekte (Aggregation). Diese Objektbeziehungen müssen im persistenten Datenspeicher festgehalten werden, denn auch sie bestimmen den Zustand eines Objektes. Ein Spezialfall einer Beziehung zwischen Objekten ist die Vererbung.
+
+\paragraph{Speichern von Klassenhierarchien (Vererbung)}
+Objektorientierte Modelle haben keine flachen Hierarchien. Klassen stehen durch das Prinzip der Vererbung in einer hierarchischen Beziehung zueinander. Im relationalen Schema ist es nicht vorgesehen Vererbung natürlich zu modellieren.
+
+\paragraph{Abfrage von Objekten}
+Mit einem \RDBMS können komplexe Abfragen einfach gestellt und effizient bearbeitet werden. Diese Abfragen beziehen sich meist auf eine Menge von Objekten mit bestimmten Kriterien. Der Zugriff auf die Objekte wird also über Mengen erreicht. Im objektorientierten Model geschieht der Zugriff über die Navigation von Objektbeziehungen. Eine Gesamtsicht auf alle Objekte oder das Bilden von konkreten Mengen von Objekten ist schwierig, da immer Pfade von Beziehungen analyisert werden müssen.
+
+\paragraph{\term{Marshalling} von Objekten}
+Das \term{Marhshalling} bezeichnet den Vorgang aus einem Abfragergebnis eine Menge von konkreten Objektinstanzen zu erstellen, die in der Applikation verwendet werden. Oft findet man auch die Begriffe \term{Hydrating} oder \term{Object Retrieving}. Ich werde des öfteren auch „Hydrieren“ verwenden. Ein Objekt kann eine beliebige Struktur haben, aber ein Abfrageergebnis ist immer ein einfaches Tupel. Wie erhält man aus dieser flachen Struktur eine Objektinstanz?\\
+\\
+Aus diesen Teilproblemen ergeben sich Anforderungen für eine Lösung des \term{Impedance Mismatch}. Jedes Kernproblem erzeugt eine große Menge von Folgeproblemen, die sich auch überlappen können. Die Komplikationen lassen sich auch als Eigenschaften der Paradigmen wie in \cite[S. 38]{classification} beschreiben. Diese sind dann:
+\begin{itemize}
+\item (Structure) Eine Klasse hat eine beliebige Struktur und eine beliebiges Verhalten definiert durch Methoden. Diese Struktur muss abgebildet werden.
+\item (Instance) Der Objektzustand muss abgebildet werden.
+\item (Encapsulation) Auf ein Objekt wird über Methoden zugegriffen. Es kapselt sein Verhalten durch diese Methoden und wird somit nicht von außen definiert. Daten in der Datenbank haben keine Methoden und sind von überall modifizierbar.
+\item (Identity) Ein Objekt muss eine eigene Identität haben, die in beiden Modellen eindeutig ist (Objektidentität kurz OID).
+\item (Processing Model) Der Zugriff auf Objekte innerhalb des objektorientierten Models geschieht über Pfade bestehend aus Objekten. Im relationalen Modell wird auf Objekte (bzw Daten) in Mengen zugegriffen.
+\item (Ownership) Das objektorientierte Model der Applikation wird vom Entwicklerteam der Software verwaltet. Das Datenbankschema vom Datenbankadministrator. Das Datenbankschema kann nicht nur von einer einzelnen Applikation benutzt werden, sondern von mehreren. Wie werden also Änderungen des Datenbankschemas oder der Applikation behandelt, so dass alle Applikationen auf die Änderungen reagieren können?
+\end{itemize}
+Die Liste der Probleme ließe sich noch weiter vergrößern, wenn man sich weitere Details von Datenbanksystemen und objektorientierten Programmiersprachen betrachtet. Eine detailiertere Vertiefung bieten Cook and Ibrahim \cite{cook-whats-the-problem}.\\

@@ -1,0 +1,361 @@
+\documentclass[11pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\Title}    {Analyse und Lösungen für den Object-relational Impedance-Mismatch}                  % Title of the thesis
+\newcommand{\TitlePDF} {Analyse und Lösungen für den Object-relational Impedance-Mismatch}                  % Title of the thesis
+\newcommand{\Author}   {Philipp Scheit}                    % Firstname Family name
+\newcommand{\Subject}  {Verträglichkeit von relationalen Datenbanken und objektorientierter Programmierung}                             % Thema
+\newcommand{\Keywords} {Object-relational Impedance Mismatch, OOP, relationale Datenbanken, ORM, Mapping}  % Keywords
+\newcommand{\Date}     {13. Dezember 2010}                    % Abgabedatum / submission deadline
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Packages
+
+\input{util/packages}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeindex
+
+\newboolean{model}
+
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\lstloadlanguages{SQL,PHP}
+
+\lstdefinestyle{sql}{
+        language=SQL,
+        basicstyle=\small\sf,
+        escapechar=\%,
+        floatplacement=htbp,
+        fontadjust=false,
+        framextopmargin=2.0pt,
+        framexbottommargin=2.0pt,
+        framexleftmargin=2.0pt,
+        framexrightmargin=2.0pt,
+        aboveskip=\medskipamount,
+        belowskip=\medskipamount,
+        commentstyle=\color{blue},
+        tabsize=4,
+        mathescape=false,
+        breaklines=true,
+        showstringspaces=false
+}
+
+\lstdefinestyle{php}{
+        language=PHP,alsolanguage=SQL,
+        basicstyle=\small\sf,
+        escapechar=\%,
+        floatplacement=htbp,
+        fontadjust=false,
+        framextopmargin=2.0pt,
+        framexbottommargin=2.0pt,
+        framexleftmargin=2.0pt,
+        framexrightmargin=2.0pt,
+        aboveskip=\medskipamount,
+        belowskip=\medskipamount,
+        commentstyle=\color{blue},
+        mathescape=false,
+        tabsize=4,
+%        stringstyle=\greenc,
+        breaklines=true,
+        showstringspaces=false
+}
+
+
+\def\squareforqed{\hbox{\rlap{$\sqcap$}$\sqcup$}}
+\def\qed{\ifmmode\squareforqed\else{\unskip\nobreak\hfil
+\penalty50\hskip1em\null\nobreak\hfil\squareforqed
+\parfillskip=0pt\finalhyphendemerits=0\endgraf}\fi}
+
+%\theoremstyle{break}
+%\theorembodyfont{\upshape}
+\renewcommand{\thepage}{\Roman{page}}
+
+\title{\Title}
+\author{\Author}
+\date{\Date}
+
+\newtheoremstyle{definition}
+  {}% hSpace above
+  {}% hSpace below
+  {\itshape}% hBody font
+  {}% hIndent amount
+  {\bfseries}% hTheorem head font
+  {:}% hPunctuation after theorem head
+  {\newline}% hSpace after theorem head
+  {}% hTheorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{definition}
+%\newtheorem{example}{Example}[chapter]
+\newtheorem{definition}{Definition}[]
+
+%newtheorem{conclusion}[definition]{Conclusion}
+%newtheorem{proposition}[definition]{Proposition}
+%newtheorem{theorem}[definition]{Theorem}
+%newtheorem{thmdef}[definition]{Theorem and Definition}
+%newtheorem{lemma}[definition]{Lemma}
+%newtheorem{corollary}[definition]{Corollary}
+%newtheorem{cordef}[definition]{Corollary and Definition}
+%newtheorem{algorithm}{Algorithm}[chapter]
+%newtheorem{postulate}{Postulate}[chapter]
+
+%newenvironment{proof}{\noindent\emph{Proof.~}}{\qed\vspace{1em}}
+%newenvironment{proofof}[1]{\noindent\emph{Proof of #1.~}\small}{\qed\vspace{1em}}
+%newenvironment{proofsketch}{\noindent\emph{Proof Sketch.~}\small}{\qed\vspace{1em}}
+\newenvironment{TODO}{\noindent\hrulefill\\[.5ex]\textbf{TODO:}\begin{itemize}}{\end{itemize}\hrulefill}
+
+\newtheoremstyle{note}
+  {}% hSpace above
+  {}% hSpace below
+  {\itshape}% hBody font
+  {}% hIndent amount
+  {\bfseries}% hTheorem head font
+  {:}% hPunctuation after theorem head
+  {\newline}% hSpace after theorem head
+  {}% hTheorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{note}
+\newtheorem*{anmerkung}{Anmerkung}
+
+
+% fußnoten
+%\footnotesep\baselineskip
+
+\setlength{\footnotemargin}{0.5em}
+\setlength{\skip\footins}{5ex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% eigene Befehle
+
+\newcommand{\term}[1]{\texttt{#1}}
+\newcommand{\abbrev}[1]{\index{#1}}
+
+%%% abkürzungen und oft verwendete Begriffe
+\newcommand{\IM}{\term{IM}\xspace} %Object-relational Impedance Mismatch
+\newcommand{\IMfull}{\term{Object-relational Impedance Mismatch}\xspace}
+
+\newcommand{\ORM}{\term{ORM}\xspace} %Object-relational Mapper
+\newcommand{\ORMs}{\term{ORMs}\xspace} %Object-relational Mappers
+
+\newcommand{\DBMS}{\term{DMBS}\xspace} %Datenbankmanagementsystem
+\newcommand{\DBMSs}{\term{DMBSs}\xspace} %Datenbankmanagementsysteme
+
+\newcommand{\RDBMS}{\term{RDMBS}\xspace} %relationales Datenbankmanagementsystem
+\newcommand{\RDBMSs}{\term{RDBMSs}\xspace} %relationale Datenbankmanagementsysteme
+
+\newcommand{\ODBMS}{\term{ODBMSs}\xspace} %Objektdatenbankmanagementsystem
+\newcommand{\ODBMSs}{\term{ODBMSs}\xspace} %Objektdatenbankmanagementsysteme
+\newcommand{\OODBMS}{\ODBMS}
+\newcommand{\OODBMSs}{\ODBMSs}
+
+\newcommand{\ORDBMS}{\term{ORDMBS}\xspace} %objektrelationales Datenbankmanagementsystem
+\newcommand{\ORDBMSs}{\term{ORDBMSs}\xspace} %objektrelationale Datenbankmanagementsysteme
+
+\newcommand{\PSCORM}{\textit{PSCORM}\xspace}
+
+\newcommand{\objectcache}{\term{Object-Cache}\xspace}
+
+%%% code
+\newcommand{\code}[1]{\term{#1}\xspace}
+\newcommand{\tabelle}[1]{\textit{#1}}
+\newcommand{\object}[1]{\term{#1}\xspace}
+
+%% Quelltext
+\floatstyle{boxed}
+\newfloat{fcode}{hbtp}{lop}
+\floatname{fcode}{Quelltext}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\doubleall}{\ensuremath{\forall\mskip-8mu plus0mu minus0mu\forall}}
+\newcommand{\M}{\ensuremath{M}}
+\newcommand{\Int}{\ensuremath{I}}
+\newcommand{\TQground}{\ensuremath{\mathcal{T}^{g}}}
+\newcommand{\TQ}{\ensuremath{\mathcal{T}^{q}}}
+\newcommand{\Tdb}{\ensuremath{\mathcal{T}^{d}}}
+\newcommand{\naf}{\ensuremath{\neg}}
+\newcommand{\TPapp}[1]{\ensuremath{T_P\!\!\uparrow\!\!#1}}
+\newcommand{\PSet}{\ensuremath{\mathcal{P}}}
+\newcommand{\scup}{\ensuremath{\circ}}
+\newcommand{\Goal}[2]{\ensuremath{#1 \leftarrow_g #2}}
+\newcommand{\Rule}[2]{\ensuremath{#1 \leftarrow #2}}
+\newcommand{\Query}{\ensuremath{\mathcal{Q}}}
+\newcommand{\larr}{\ensuremath{\leftarrow}}
+\newcommand{\as}{\ensuremath{\rightarrow}}
+\newcommand{\rf}[1]{\ensuremath{\uparrow}#1}
+\newcommand{\scopeS}{\ensuremath{\ll\!\!\!}}
+\newcommand{\scopeE}{\ensuremath{\gg}}
+\newcommand{\scope}[1]{\ll #1\gg}
+\newcommand{\mth}[1]{\ensuremath{#1}}
+\newcommand{\mtc}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\Prog}{\ensuremath{P}}
+\newcommand{\Store}{\ensuremath{\mathcal{S}}}
+\newcommand{\tn}[1]{\ensuremath{t_{#1}}}
+\newcommand{\simul}{\ensuremath{\preceq}}
+\newcommand{\substsub}{\ensuremath{\subseteq}}
+\newcommand{\substeq}{\ensuremath{=}}
+\newcommand{\hl}[1]{\textbf{\redc #1}}
+\newcommand{\querc}{\color{darkgreen}}
+\newcommand{\consc}{\color{blue}}
+\newcommand{\references}{\ensuremath{\uparrow}}
+\newcommand{\CONS}{{\redc\!\!\! CONSTRUCT\blackc}}
+\newcommand{\FROM}{{\redc\!\!\! FROM\blackc}}
+\newcommand{\END}{{\redc\!\!\! END\blackc}}
+\newcommand{\mybox}[1]{\fbox{\rule[-0.6ex]{0ex}{2.4ex}#1}}
+
+\renewcommand{\leadsto}{\ensuremath{\rightarrow}}
+\renewcommand{\subset}{\subsetneq} % we use subsetneq instead of subset
+
+
+% Verbatim environments
+\DefineVerbatimEnvironment%
+  {Grammar}{Verbatim}
+  {numbers=left,frame=lines}
+
+\DefineVerbatimEnvironment%
+  {ExVerbatim}{Verbatim}
+  {frame=none,commandchars=\\\(\)}
+%
+
+% PST Pictures
+\newcommand{\knoten}[4]{\rput(#1){\circlenode{#2}{#3}}\rput(#1){\rnode{DUMMY}{\rule[-0.5ex]{0ex}{10ex}#4}}}
+
+% Colors
+\definecolor{darkgreen}{rgb}{0,.6,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{darkred}{rgb}{.56,0,0}
+\definecolor{violet}{rgb}{.7,.3,1}
+\definecolor{variablecolor}{rgb}{.3,.5,1}
+\definecolor{tagcolor}{rgb}{.15,.25,.5}
+\definecolor{orange}{rgb}{.5,.35,0}
+
+\definecolor{pastyellow}{rgb}{1,1,.5}
+\definecolor{pastred}{rgb}{1,.5,.5}
+\definecolor{pastblue}{rgb}{.5,.5,1}
+
+\newcommand{\blackc}{\color{black}}
+\newcommand{\greenc}{\color{darkgreen}}
+\newcommand{\bluec}{\color{darkblue}}
+\newcommand{\redc}{\color{darkred}}
+\newcommand{\orangec}{\color{orange}}
+\newcommand{\varc}{\color{variablecolor}}
+\newcommand{\vioc}{\color{violet}}
+
+\definecolor{pastred}{rgb}{1,.9,.9}
+\definecolor{pastblue}{rgb}{.9,.9,1}
+\definecolor{pastgreen}{rgb}{.9,1,.9}
+
+\newcommand{\bgred}[1]{\colorbox{pastred}{#1}}
+\newcommand{\bggreen}[1]{\colorbox{pastgreen}{#1}}
+\newcommand{\bgblue}[1]{\colorbox{pastblue}{#1}}
+\newcommand{\tagc}{\color{tagcolor}\!\!\!}
+\newcommand{\ntagc}{\color{black}\!\!\!}
+\newcommand{\tagS}[1]{\color{tagcolor} <#1>\color{black} }
+\newcommand{\tagE}[1]{\color{tagcolor} </#1>\color{black} }
+\newcommand{\keyword}[1]{\texttt{\redc #1\blackc}}
+
+
+% in examples
+\newcommand{\variable}[1]{\varc\!\!\! var\bluec\ #1\blackc}
+\newcommand{\varas}[1]{\varc\!\!\! var\bluec\ #1\varc\ \as\blackc}
+\newcommand{\varasf}[1]{\varc\!\!\! var\bluec\ #1\varc\ \ensuremath{\rightsquigarrow}\blackc}
+\newcommand{\str}[1]{\greenc "#1"\blackc}
+\newcommand{\fun}[2]{\vioc #1 (\blackc #2\vioc )\blackc }
+\newcommand{\lbl}[1]{\textit{(#1)}}
+\newcommand{\br}[1]{(#1)}
+
+% grammar
+\newcommand{\strp}[1]{\greenc '#1'\blackc}
+\newcommand{\nt}[1]{\color{tagcolor} <#1>\blackc}
+
+\newcommand{\ntt}[1]{\textit{\texttt{<#1>}}}
+
+\newcommand{\rthead}[1]{\textit{\texttt{#1}}}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\newcommand{\indexdef}[1]{\index{#1}}
+\newcommand{\indexconcept}[1]{\index{#1}}
+
+
+
+\newcommand{\subscript}[1]{\ensuremath{_{#1}}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% First Pages
+
+\include{title/main}
+
+\cleardoublepage
+\setcounter{page}{1}
+\renewcommand{\thepage}{\arabic{page}}
+
+\part{Die Theorie des Object-relational Impedance Mismatch}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partI/einleitung/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partI/kernprobleme/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partI/loesungen/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partI/orm/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partI/frameworks/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partI/fazit1/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\part{Lösungsansätze am Beispiel-Framework PSCORM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partII/einleitung/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\include{chapters/partII/anforderungen/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partII/konzepte/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partII/evaluation/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{chapters/partII/zusammenfassung/main}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Appendix
+
+\include{appendix/main}
+
+\end{document}

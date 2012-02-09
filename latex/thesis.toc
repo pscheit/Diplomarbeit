@@ -1,0 +1,76 @@
+\contentsline {part}{I\hspace {1em}Die Theorie des Object-relational Impedance Mismatch}{1}{part.1}
+\contentsline {chapter}{\numberline {1}Einf\IeC {\"u}hrung}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Der Aufbau dieser Arbeit}{4}{section.1.1}
+\contentsline {chapter}{\numberline {2}Die Kernprobleme}{7}{chapter.2}
+\contentsline {paragraph}{Speichern der Struktur einer Klasse}{7}{section*.1}
+\contentsline {paragraph}{Speichern des Zustandes eines Objektes}{7}{section*.2}
+\contentsline {paragraph}{Speichern von Beziehungen zwischen Objekten}{7}{section*.3}
+\contentsline {paragraph}{Speichern von Klassenhierarchien (Vererbung)}{7}{section*.4}
+\contentsline {paragraph}{Abfrage von Objekten}{7}{section*.5}
+\contentsline {paragraph}{\texttt {Marshalling} von Objekten}{8}{section*.6}
+\contentsline {chapter}{\numberline {3}L\IeC {\"o}sungen}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Ersetzen der Datenbank}{9}{section.3.1}
+\contentsline {paragraph}{Oracle11}{11}{section*.7}
+\contentsline {paragraph}{DB2}{12}{section*.8}
+\contentsline {paragraph}{PostgreSQL}{12}{section*.9}
+\contentsline {paragraph}{Microsoft SQL Server}{12}{section*.10}
+\contentsline {paragraph}{Cach\IeC {\'e} von Intersystems (nicht abgebildet)}{12}{section*.11}
+\contentsline {section}{\numberline {3.2}Object-relational Mapper}{13}{section.3.2}
+\contentsline {chapter}{\numberline {4}Object-relational Mapping}{15}{chapter.4}
+\contentsline {section}{\numberline {4.1}Speichern des Zustandes eines Objektes}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}Speichern von Klassenhierarchien}{16}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Horizontales Mapping}{16}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Vertikales Mapping}{16}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Filter-Mapping}{17}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Generelles Mapping}{17}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}Speichern von Beziehungen zwischen Objekten}{18}{section.4.3}
+\contentsline {section}{\numberline {4.4}Laden und Marshalling von Objekten}{19}{section.4.4}
+\contentsline {section}{\numberline {4.5}Vertiefung: Object Loading}{20}{section.4.5}
+\contentsline {chapter}{\numberline {5}Frameworks}{25}{chapter.5}
+\contentsline {section}{\numberline {5.1}\IeC {\"U}bersicht}{25}{section.5.1}
+\contentsline {section}{\numberline {5.2}Hibernate und Vererbung}{28}{section.5.2}
+\contentsline {section}{\numberline {5.3}Abfragesprachen}{29}{section.5.3}
+\contentsline {section}{\numberline {5.4}Beziehungen zwischen Objekten}{32}{section.5.4}
+\contentsline {section}{\numberline {5.5}Object Loading}{34}{section.5.5}
+\contentsline {section}{\numberline {5.6}Abbildung von Klassen und Attributen}{35}{section.5.6}
+\contentsline {section}{\numberline {5.7}Zusammenfassung}{36}{section.5.7}
+\contentsline {chapter}{\numberline {6}Fazit}{39}{chapter.6}
+\contentsline {section}{\numberline {6.1}Gibt es eine perfekte L\IeC {\"o}sung?}{39}{section.6.1}
+\contentsline {part}{II\hspace {1em}L\IeC {\"o}sungsans\IeC {\"a}tze am Beispiel-Framework PSCORM}{41}{part.2}
+\contentsline {chapter}{\numberline {7}Einf\IeC {\"u}hrung}{43}{chapter.7}
+\contentsline {section}{\numberline {7.1}Aufbau dieses Teils}{43}{section.7.1}
+\contentsline {section}{\numberline {7.2}Besonderheiten von PHP}{44}{section.7.2}
+\contentsline {chapter}{\numberline {8}Konzepte und Implementierung}{47}{chapter.8}
+\contentsline {section}{\numberline {8.1}Dynamischer Code}{47}{section.8.1}
+\contentsline {section}{\numberline {8.2}Metainformationen}{48}{section.8.2}
+\contentsline {section}{\numberline {8.3}Cache}{49}{section.8.3}
+\contentsline {section}{\numberline {8.4}Datenbankabstraktion}{49}{section.8.4}
+\contentsline {section}{\numberline {8.5}Abbildung von Klassen und Attributen}{50}{section.8.5}
+\contentsline {section}{\numberline {8.6}Abbildung von Vererbung}{50}{section.8.6}
+\contentsline {section}{\numberline {8.7}Beziehungen zwischen Objekten}{52}{section.8.7}
+\contentsline {section}{\numberline {8.8}Abfragesprache}{52}{section.8.8}
+\contentsline {section}{\numberline {8.9}Object Loading}{53}{section.8.9}
+\contentsline {chapter}{\numberline {9}Evaluation}{57}{chapter.9}
+\contentsline {section}{\numberline {9.1}Konfiguration}{57}{section.9.1}
+\contentsline {section}{\numberline {9.2}Test 1}{58}{section.9.2}
+\contentsline {paragraph}{Kohana}{59}{section*.12}
+\contentsline {paragraph}{\textit {PSCORM}\xspace }{59}{section*.13}
+\contentsline {paragraph}{Doctrine}{59}{section*.14}
+\contentsline {section}{\numberline {9.3}Test 2}{59}{section.9.3}
+\contentsline {paragraph}{Kohana}{60}{section*.15}
+\contentsline {paragraph}{\textit {PSCORM}\xspace }{60}{section*.16}
+\contentsline {paragraph}{Doctrine}{60}{section*.17}
+\contentsline {section}{\numberline {9.4}Ergebnisse}{60}{section.9.4}
+\contentsline {chapter}{\numberline {10}Zusammenfassung}{63}{chapter.10}
+\contentsline {chapter}{\numberline {A}Beispiel Datenbank-Schema}{67}{appendix.A}
+\contentsline {chapter}{\numberline {B}Quelltext der Evaluation}{69}{appendix.B}
+\contentsline {chapter}{\numberline {C}Implementierungs\IeC {\"u}bersicht PSCORM}{75}{appendix.C}
+\contentsline {subsubsection}{inc.config.php}{75}{section*.18}
+\contentsline {subsubsection}{class}{75}{section*.19}
+\contentsline {subsubsection}{DB.php}{75}{section*.20}
+\contentsline {subsubsection}{Cache.php}{76}{section*.21}
+\contentsline {subsubsection}{ORMObject.php}{76}{section*.22}
+\contentsline {subsubsection}{Query.php}{76}{section*.23}
+\contentsline {subsubsection}{Query[0-9].php}{76}{section*.24}
+\contentsline {subsubsection}{Project.php Aggregation.php Aggregation2Project.php}{76}{section*.25}
+\contentsline {chapter}{Literaturverzeichnis}{76}{section*.25}

@@ -1,0 +1,40 @@
+\chapter{Einführung}
+
+\term{Impedance matching} bezeichnet in der Elektrotechnik einen Vorgang, bei dem der Eingangswiderstand des Verbrauchers oder der Ausgangswiderstand der Quelle in einem Stromkreis so angepasst wird, dass der Wirkungsgrad genau 50\% beträgt. Abstrakter formuliert muss man Leistungen zwischen zwei Punkten angleichen, um das optimale Ergebnis zur Übertragung von Signalen oder Energie zu erhalten. \\
+Der Begriff wurde dann später in die Informatik übernommen. 
+\begin{definition}[Object-relational Impedance Mismatch]
+Der Object-relational Impedance Mismatch (kurz: IM) bezeichnet die Unverträglichkeit zwischen dem relationalen Datenmodell (definiert durch das relationale Schema) und dem objektorientierten Programmierparadigma.
+\end{definition}
+\noindent Beim \term{Impedance matching} in der Informatik sind die zwei Punkte, zwischen denen die Übertragung optimiert werden soll, die Welt der relationalen Datenbanken und die Welt der Objektorientierung. \\
+\\
+Die objektorientierte Programmierung ist heute eine der bekanntesten Programmierparadigmen und beeinflusst das Design, die Methoden und den Entwicklungsprozess von moderner Software. Die Strukturen der objektorientierten Programmierung eignen sich am besten um die Anwendungslogik (\term{Business Logic}) und ein Model der realen Welt abzubilden. Polymorphie, Kapselung und Vererbung sind aus moderner Softwareentwicklung nicht mehr wegzudenken.\\
+\\
+Relationale Datenbanken wurden konzipiert riesige Mengen von elementaren Datentypen sicher abzuspeichern und schnell und effizient abfragen zu können. Im relationalen Schema wird ein Model der realen Welt durch Relationen dargestellt. Relationen unterliegen dem mathematischen Konzept der mengentheoretischen Relation, dem Kartesischen Produkt von einer Liste von Ausprägungen der elementaren Datentypen.\\
+\\
+Diese beiden Paradigmen eignen sich sehr gut, die Probleme auf ihrem Gebiet zu lösen, unterscheiden sich aber grundlegend in der Denkweise, der Methodik und im Design.\\
+\\
+Heutzutage benötigt fast jede objektorientierte Applikation einen persistenten Datenspeicher. Muss der Zugriff auf die Daten auch für große Mengen performant bleiben, werden fast immer relationale Datenbankmanagementsysteme (\RDBMS) hinzugezogen. Es existiert also immer das Bedürfnis das Model der objektorientierten Applikation und das Model des relationalen Schemas miteinander zu verbinden. Nach einer Studie werden 30 - 40\% der Entwicklungszeit einer Applikation dafür verwendet objektrelationale Lösungen für die Daten zu finden \cite{Keene04dataservices}. Wenn der \IM einmal sorgfältig gelöst wurde, hat das große Vorteile für die Entwicklung jeder weiteren Anwendung.\\
+Bevor man sich also mit der Anwendungslogik und den Problemen beschäftigt, die sich in jedem Projekt neu ergeben, sollte man Zeit investieren den \IM einmal zufriedenstellend zu lösen, um nicht in jedem Projekt erneut ein Drittel der verfügbaren Zeit verbrauchen zu müssen \cite{Neward06thevietnam}.\\
+
+\section{Der Aufbau dieser Arbeit}
+
+Im nächsten Kapitel werden die Kernprobleme des \term{Impedance Mismatch} vorgestellt. Diese Probleme werden sich in allen Bereichen dieser Arbeit wiederfinden und unter verschiedenen Gesichtspunkten betrachtet werden. \\
+\\
+Im dritten Kapitel werden allgemeine Lösungen für den \IM vorgestellt: Entweder ersetzt man das relationale Datenbanksystem mit einem alternativen System, oder man versucht das Problem auf Softwareebene anzugehen. Es werden objektorientierte Datenbankmanagementsysteme betrachtet, sowie die Weiterentwicklung von relationalen Datenbankmanagementsystemen mit objektrelationalen Features.\\
+\\
+Im vierten Kapitel konzentriere ich mich auf die Softwarelösung. Die Strategien eines \term{Object-relational Mapper} werden vorgestellt, die Anforderungen definiert und mögliche Schwierigkeiten veranschaulicht. \\
+\\
+Im fünften Kapitel wird ein kleiner Überblick über die große Masse von Frameworks, die sich als Lösung für den \IM bezeichnen gegeben. Auch die Standards für die Speicherung von Objekten, die größtenteils durch den Java Community Process entwickelt wurden, werden berücksichtigt. \\
+Zusätzlich werden zwei PHP Frameworks (Kohana und Doctrine) und zwei Java Frameworks (Hibernate und TopLink) untersucht. Ich beschreibe, wie diese die Anforderungen aus Kapitel 4 implementieren. \\
+\\
+Der erste Teil wird mit einem Fazit in Kapitel 6 abgeschlossen. \\
+\\
+Im zweiten Teil der Arbeit wird ein selbstentwickeltes Framework in PHP namens \PSCORM vorgestellt. Anhand dieses Beispiels, wird eine Möglichkeit gezeigt, wie man ein solches Framework umsetzen könnte. \\
+\\
+In der Einführung werden spezielle Eigenarten der Webentwicklung mit PHP vermittelt und erklärt, warum sich diese so stark auf die praktische PHP Programmierung und auf PHP Frameworks auswirken. \\
+\\
+Im zweiten Kapitel werden Besonderheiten der Implementierung von \PSCORM skizziert und Ideen aus dem theoretischen Teil weiter ausformuliert. Es werden Strategien aus den untersuchten Frameworks wieder aufgegriffen und eigene erklärt. \\
+\\
+In einer Evaluation wird \PSCORM mit Kohana und Doctrine, die schon im ersten Teil der Arbeit untersucht wurden, verglichen. Es werden zwei Tests für das Laden von Objekten ausgewertet. Danach werden diese Ergebnisse analysiert und kritisch bewertet, ob die neuen Konzepte für das Framework wirkliche Verbesserungen bedeuten können. \\
+\\
+Im Schlusskapitel werden die Erkenntnisse dieser Arbeit zusammengefasst.
